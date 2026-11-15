@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nuestro reto</title>
+<style>
+:root{--bg:#fbf7f4;--card:#fff;--tx:#2b2326;--mut:#7a6d72;--line:#eadfe0;--pri:#1a4fa3;--gold:#f5c518;--ok:#2f9e6b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1618;--card:#271f22;--tx:#f4eaec;--mut:#a89a9f;--line:#3a2f33;--pri:#6fa0f0;--gold:#ffd43b;--ok:#5ccf96}}
+:root[data-theme="dark"]{--bg:#1b1618;--card:#271f22;--tx:#f4eaec;--mut:#a89a9f;--line:#3a2f33;--pri:#6fa0f0;--gold:#ffd43b;--ok:#5ccf96}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4}
+main{max-width:560px;margin:0 auto;padding:18px 16px 40px}
+.hero{background:#123f8c;color:#fff;border-radius:18px;padding:16px;margin-bottom:16px;border-bottom:8px solid var(--gold)}
+.hero h1{font-size:1.5rem;margin:0 0 4px}
+.hero p{color:#d8e4ff;margin:0;font-size:.95rem}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.st{border-radius:16px;padding:12px;text-align:center;background:var(--card);border:1px solid var(--line)}
+.st b{display:block;font-size:1.35rem;color:var(--pri)}
+.st span{font-size:.8rem;color:var(--mut)}
+.st.gold{background:var(--gold);border-color:var(--gold);grid-column:1/-1}
+.st.gold b,.st.gold span{color:#10285a}
+.st.gold b{font-size:1.7rem}
+.card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:16px;padding:14px;margin-bottom:14px}
+.row{display:flex;gap:8px;margin-top:8px}
+input,select,button{font:inherit;color:var(--tx)}
+input,select{flex:1;min-width:0;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
+button{border:0;border-radius:10px;padding:10px 14px;background:var(--pri);color:#fff;font-weight:600;cursor:pointer}
+button.ghost{background:transparent;color:var(--mut);border:1px solid var(--line)}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tabs button{flex:1;background:var(--card);color:var(--mut);border:1px solid var(--line)}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.task{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line)}
+.task:last-child{border:0}
+.task input[type=checkbox]{flex:none;width:22px;height:22px;accent-color:var(--ok)}
+.task .t{flex:1;min-width:0}
+.task .t small{display:block;color:var(--mut)}
+.task.done .t strong{text-decoration:line-through;color:var(--mut)}
+.val{font-weight:700;color:var(--pri)}
+.task.done .val{color:var(--ok)}
+.x{background:none;color:var(--mut);padding:4px 8px;font-size:1.1rem}
+.empty,.note{color:var(--mut);text-align:center;font-size:.9rem;padding:10px}
+.note.warn{color:#d64545}
+.two{display:flex;gap:8px}.two button{flex:1}
+label.l{display:block;font-size:.8rem;color:var(--mut);margin-top:10px}
+:root{--bg:#fdf5ec;--pink:#e8749b;--pinkT:#b83a69;--pinkL:#fde6ee;--olive:#7d8a3e;--oliveT:#5d6a22;--oliveL:#eef0dc;--blueL:#e3ecfb;--onacc:#fff;--pri:#1d4ea8;--ok:#7d8a3e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1719;--pink:#f08fb0;--pinkT:#f4a3bf;--pinkL:#3d2330;--olive:#a9b86a;--oliveT:#c3d083;--oliveL:#2b2f1b;--blueL:#1f2b45;--onacc:#1a1416;--pri:#6fa0f0;--ok:#a9b86a}}
+:root[data-theme="dark"]{--bg:#1c1719;--pink:#f08fb0;--pinkT:#f4a3bf;--pinkL:#3d2330;--olive:#a9b86a;--oliveT:#c3d083;--oliveL:#2b2f1b;--blueL:#1f2b45;--onacc:#1a1416;--pri:#6fa0f0;--ok:#a9b86a}
+.hero{background:linear-gradient(135deg,#123f8c 0%,#1d4ea8 62%,#b8527c 135%);border-bottom:0;overflow:hidden}
+.hero::after{content:"";display:block;height:9px;margin:14px -16px -16px;background:linear-gradient(90deg,var(--gold) 0 34%,var(--pink) 34% 67%,var(--olive) 67% 100%)}
+.st.az{background:var(--pinkL);border-color:var(--pink)}.st.az b{color:var(--pinkT)}
+.st.ju{background:var(--blueL);border-color:var(--pri)}
+.st.sem{background:var(--oliveL);border-color:var(--olive)}.st.sem b{color:var(--oliveT)}
+#add{background:var(--pri);color:var(--onacc);box-shadow:inset 0 -4px 0 var(--gold);padding-bottom:12px}
+#close{border-color:var(--olive);color:var(--oliveT)}
+#reset{border-color:var(--pink);color:var(--pinkT)}
+.tabs button.on{color:var(--onacc)}
+.tabs button:nth-child(1).on{background:var(--olive);border-color:var(--olive)}
+.tabs button:nth-child(2).on{background:var(--pink);border-color:var(--pink)}
+.tabs button:nth-child(3).on{background:var(--pri);border-color:var(--pri)}
+.task.az{border-left:5px solid var(--pink);padding-left:10px}
+.task.ju{border-left:5px solid var(--pri);padding-left:10px}
+.task input[type=checkbox]{accent-color:var(--olive)}
+.task.done .val{color:var(--oliveT)}
+:root{--bg:#fff8ee;--bgtop:#ffeeb8;--card:#fff;--line:#f3e3d3;--tx:#2a2030;--mut:#7d6d78;--pri:#2457d6;--gold:#ffc933;--pink:#ff6f91;--pinkT:#c2285a;--pinkL:#ffe1ea;--olive:#8fa82a;--oliveT:#5a6d10;--oliveL:#ecf5c4;--blueL:#dde8ff;--onacc:#fff;--ok:#8fa82a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1820;--bgtop:#2a2140;--card:#2a2330;--line:#3d3447;--tx:#f6eef8;--mut:#b5a8b8;--pri:#7aa2ff;--gold:#ffd54a;--pink:#ff8fb0;--pinkT:#ffa6c0;--pinkL:#43243a;--olive:#b7cc4a;--oliveT:#cfe06c;--oliveL:#2c3216;--blueL:#1f2a4d;--onacc:#1a1416;--ok:#b7cc4a}}
+:root[data-theme="dark"]{--bg:#1d1820;--bgtop:#2a2140;--card:#2a2330;--line:#3d3447;--tx:#f6eef8;--mut:#b5a8b8;--pri:#7aa2ff;--gold:#ffd54a;--pink:#ff8fb0;--pinkT:#ffa6c0;--pinkL:#43243a;--olive:#b7cc4a;--oliveT:#cfe06c;--oliveL:#2c3216;--blueL:#1f2a4d;--onacc:#1a1416;--ok:#b7cc4a}
+body{background:linear-gradient(180deg,var(--bgtop) 0,var(--bg) 260px) no-repeat,var(--bg)}
+.hero{background:linear-gradient(135deg,#1f4fd1 0%,#5a55e0 58%,#ff6f91 150%);box-shadow:0 6px 18px rgba(36,87,214,.25)}
+.st{box-shadow:0 2px 8px rgba(42,32,48,.06)}
+.st.gold{background:linear-gradient(135deg,#ffd84d,#ffb92e);border-color:#ffb92e}
+.st.gold b,.st.gold span{color:#15296b}
+.card{box-shadow:0 2px 10px rgba(42,32,48,.06)}
+.task.az{background:linear-gradient(90deg,var(--pinkL),transparent 40%)}
+.task.ju{background:linear-gradient(90deg,var(--blueL),transparent 40%)}
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <h1>Nuestro reto 🏆</h1>
+    <p>Meta: 3 tareas por día cada uno. Si no cumplimos, el otro pone la prenda. El premio es algo lindo para los dos. ¡Vamos, Juan y Azul! 💙💛</p>
+  </div>
+
+  <div class="stats">
+    <div class="st gold"><b id="saved">$0</b><span>✈️ Premio para el viaje o la cita</span></div>
+    <div class="st az"><b id="hoyA">0 / 3</b><span>Azul hoy</span></div>
+    <div class="st ju"><b id="hoyJ">0 / 3</b><span>Juan hoy</span></div>
+    <div class="st sem" style="grid-column:1/-1"><b id="sem">0 / 42</b><span>📅 Tareas de la semana (3 por día entre los dos)</span></div>
+  </div>
+
+  <div class="card">
+    <strong>Nueva tarea</strong>
+    <div class="row"><input id="title" placeholder="Ej: 20 min de rollers" maxlength="80"></div>
+    <div class="row">
+      <select id="who"><option>Azul</option><option>Juan</option></select>
+      <select id="cat"><option>Trabajo</option><option>Estudio</option><option>Ejercicio</option><option>Escrituras</option><option>Capilla</option><option>Limpieza</option><option>Otro</option></select>
+    </div>
+    <div class="row">
+      <input id="day" type="date" aria-label="Día">
+      <button id="add">Agregar</button>
+    </div>
+    <label class="l" for="price">Premio fijo por tarea hecha ($), se usa en todas las tareas nuevas</label>
+    <div class="row"><input id="price" type="number" inputmode="numeric" min="0" step="50" placeholder="Ej: 500"></div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="card" id="list"></div>
+
+  <div class="two">
+    <button class="ghost" id="close">Cerrar semana</button>
+    <button class="ghost" id="reset">Gastar / volver a cero</button>
+  </div>
+  <p class="note">Cerrar semana guarda la plata en el premio y limpia lo hecho. Solo “Gastar / volver a cero” baja el premio a $0.</p>
+  <p class="note" id="status"></p>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+let db = null, tasks = [], jar = {saved: 0}, price = 0, filter = 'Todos';
+const money = n => '$' + Number(n || 0).toLocaleString('es-AR');
+const ymd = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const today = () => ymd(new Date());
+function weekRange() {
+  const d = new Date(), off = (d.getDay() + 6) % 7;
+  const a = new Date(d); a.setDate(d.getDate() - off);
+  const b = new Date(a); b.setDate(a.getDate() + 6);
+  return [ymd(a), ymd(b)];
+}
+const dayOf = t => t.day || ymd(new Date(t.createdAt || Date.now()));
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function fail() { $('#status').className = 'note warn'; $('#status').textContent = 'No se pudo guardar. Revisá que tengas permiso para editar.'; }
+
+function render() {
+  const t0 = today(), [w1, w2] = weekRange();
+  const doneSum = tasks.filter(t => t.done).reduce((s, t) => s + (t.value || 0), 0);
+  $('#saved').textContent = money((jar.saved || 0) + doneSum);
+  const hoy = n => tasks.filter(t => t.who === n && t.done && dayOf(t) === t0).length;
+  $('#hoyA').textContent = hoy('Azul') + ' / 3';
+  $('#hoyJ').textContent = hoy('Juan') + ' / 3';
+  $('#sem').textContent = tasks.filter(t => t.done && dayOf(t) >= w1 && dayOf(t) <= w2).length + ' / 42';
+
+  const tabs = $('#tabs'); tabs.replaceChildren();
+  ['Todos', 'Azul', 'Juan'].forEach(n => {
+    const b = el('button', n === filter ? 'on' : '', n);
+    b.onclick = () => { filter = n; render(); };
+    tabs.append(b);
+  });
+  const list = $('#list'); list.replaceChildren();
+  const shown = tasks.filter(t => filter === 'Todos' || t.who === filter)
+    .sort((a, b) => (a.done - b.done) || dayOf(a).localeCompare(dayOf(b)) || (a.createdAt - b.createdAt));
+  if (!shown.length) list.append(el('div', 'empty', 'Todavía no hay tareas. ¡Agreguen la primera!'));
+  shown.forEach(t => {
+    const row = el('div', 'task' + (t.done ? ' done' : '') + (t.who === 'Azul' ? ' az' : ' ju'));
+    const cb = el('input'); cb.type = 'checkbox'; cb.checked = !!t.done;
+    cb.onchange = () => update(t.id, {done: cb.checked});
+    const box = el('div', 't');
+    const d = dayOf(t), lbl = d === t0 ? 'hoy' : d.slice(8) + '/' + d.slice(5, 7);
+    box.append(el('strong', '', t.title), el('small', '', t.who + ' · ' + t.cat + ' · ' + lbl));
+    const x = el('button', 'x', '✕'); x.title = 'Borrar';
+    x.onclick = () => remove(t.id);
+    row.append(cb, box);
+    if (t.value) row.append(el('span', 'val', money(t.value)));
+    row.append(x);
+    list.append(row);
+  });
+}
+
+function update(id, data) {
+  if (db) db.doc('tasks/' + id).update(data).catch(fail);
+  else { Object.assign(tasks.find(t => t.id === id), data); render(); }
+}
+function remove(id) {
+  if (db) db.doc('tasks/' + id).delete().catch(fail);
+  else { tasks = tasks.filter(t => t.id !== id); render(); }
+}
+function setJar(saved) {
+  if (db) db.doc('jar/totals').set({saved}).catch(fail);
+  else { jar = {saved}; render(); }
+}
+
+$('#day').value = today();
+$('#add').onclick = () => {
+  const title = $('#title').value.trim();
+  if (!title) return $('#title').focus();
+  const t = {title, who: $('#who').value, cat: $('#cat').value, value: price, day: $('#day').value || today(), done: false, createdAt: Date.now()};
+  if (db) db.collection('tasks').add(t).catch(fail);
+  else { t.id = 'l' + t.createdAt; tasks.push(t); render(); }
+  $('#title').value = '';
+};
+$('#price').onchange = () => {
+  price = Math.max(0, Number($('#price').value) || 0);
+  if (db) db.doc('jar/settings').set({price}).catch(fail);
+};
+
+$('#close').onclick = () => {
+  const done = tasks.filter(t => t.done);
+  if (!done.length || !confirm('¿Cerrar la semana? Se guardan ' + money(done.reduce((s, t) => s + (t.value || 0), 0)) + ' en el premio y se borran las ' + done.length + ' tareas hechas.')) return;
+  setJar((jar.saved || 0) + done.reduce((s, t) => s + (t.value || 0), 0));
+  done.forEach(t => remove(t.id));
+};
+$('#reset').onclick = () => {
+  if (!confirm('¿Gastar el premio y volver a $0?')) return;
+  setJar(0);
+  tasks.filter(t => t.done).forEach(t => remove(t.id));
+};
+
+render();
+$('#status').textContent = 'Conectando…';
+
+(async () => {
+  try { db = await claude.use('db'); } catch (e) { db = null; }
+  if (!db) {
+    $('#status').className = 'note warn';
+    $('#status').textContent = 'Modo local: no se guarda ni se comparte. Abrí el enlace desde claude.ai con tu cuenta.';
+    return;
+  }
+  $('#status').textContent = 'Compartido en vivo ✓';
+  db.collection('tasks').onSnapshot(s => { tasks = s.docs.map(d => ({id: d.id, ...d.data()})); render(); }, fail);
+  db.doc('jar/totals').onSnapshot(s => { jar = s.exists ? s.data() : {saved: 0}; render(); }, fail);
+  db.doc('jar/settings').onSnapshot(s => {
+    price = s.exists ? (s.data().price || 0) : 0;
+    if (document.activeElement !== $('#price')) $('#price').value = price || '';
+  }, fail);
+})();
+</script>
+</body>
+</html>
